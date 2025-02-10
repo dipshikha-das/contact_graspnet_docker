@@ -1,0 +1,30 @@
+services:
+  conda-img:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+    runtime: nvidia  # Enable the use of NVIDIA GPUs
+    container_name: conda_container
+    volumes:
+      - ./app:/app  # Mount the current directory into the container
+      - ./:/contact_graspnet
+      - /tmp/.X11-unix:/tmp/.X11-unix  # For GUI applications
+    # ports:
+      # - "11311:11311"  # Expose the ROS master port
+    environment:
+      - DISPLAY=${DISPLAY}  # Forward display if running with GUI (optional)
+      - NVIDIA_VISIBLE_DEVICES=all  # This will make all GPUs available, you can restrict to a specific GPU (e.g., "0" for GPU 0)
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility  # Specify the necessary GPU capabilities
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all  # Or specify a number if you want to limit the GPUs, e.g., 1
+              capabilities: [gpu]
+    tty: true
+    stdin_open: true
+    network_mode: host  # Use host networking for ROS communication
+    restart: always
+    privileged: true  # Optional, for extra permissions, e.g., access to hardware
