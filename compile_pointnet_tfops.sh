@@ -1,5 +1,5 @@
-CUDA_INCLUDE=' -I/usr/local/cuda/include/'
-CUDA_LIB=' -L/usr/local/cuda/lib64/'
+CUDA_INCLUDE=' -I/usr/local/cuda-11.1/include/'
+CUDA_LIB=' -L/usr/local/cuda-11.1/lib64/'
 TF_CFLAGS=$(python3 -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))')
 TF_LFLAGS=$(python3 -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))')
 cd pointnet2/tf_ops/sampling
