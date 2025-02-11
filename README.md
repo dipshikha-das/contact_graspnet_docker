@@ -1,4 +1,4 @@
-# Contact-GraspNet  
+# Contact-GraspNet *[Docker]* 
 
 ### Contact-GraspNet: Efficient 6-DoF Grasp Generation in Cluttered Scenes   
 Martin Sundermeyer, Arsalan Mousavian, Rudolph Triebel, Dieter Fox  
@@ -10,11 +10,40 @@ ICRA 2021
   <img src="examples/2.gif" width="640" title="UOIS + Contact-GraspNet"/>
 </p>
 
+---
+## Changes for *docker*
+
+This repository has a *dockerized* version to run the original repository.
+Follow the steps below to setup:
+
+- Clone the repository
+- Download [models and test data](#download-models-and-data)
+- Build and run docker
+
+``` bash
+
+  docker compose build --no-cache
+
+  docker compose up -d
+
+  docker exec -it conda-img /bin/bash
+
+```
+- Inside the container execute same as [Troubleshooting](#troubleshooting)
+```bash
+  sh compile_pointnet_tfops.sh
+```
+
+- Proceed with same steps from [Inference](#inference) to validate and test.
+- Other remaining requirements are the same.
+---
+
+
 ## Installation
 
 This code has been tested with python 3.7, tensorflow 2.2, CUDA 11.1
 
-Create the conda env
+~~Create the conda env~~ - **NOT** required since handled inside docker
 ```
 conda env create -f contact_graspnet_env.yml
 ```
